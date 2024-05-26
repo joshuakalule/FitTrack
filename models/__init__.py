@@ -24,3 +24,8 @@ CLASSES = {
 # set storage type
 if getenv('HBNB_ENV') is not None:
     environ['HBNB_MYSQL_DB'] = 'hbnb_test_db'
+
+from models.engine.db_storage import DBStorage
+
+storage = DBStorage()
+storage.reload()

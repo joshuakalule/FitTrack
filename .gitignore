@@ -1,3 +1,6 @@
+# ENV variable
+.env
+
 # Vim temporary files
 [._]*.sw[a-z]
 [._]sw[a-z]

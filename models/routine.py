@@ -18,6 +18,7 @@ class Routine(BaseModel, Base):
     __tablename__ = 'routines'
     title = Column(String(128), nullable=False)
     description = Column(String(512), nullable=False)
-    workout = Column(String(60), ForeignKey('workouts.id'), nullable=False)
+    program_id = Column(String(60), ForeignKey('programs.id'), nullable=False)
+    workout_id = Column(String(60), ForeignKey('workouts.id'), nullable=False)
     workout_time = Column(DateTime, nullable=False)
     workout_period = Column(DateTime, nullable=False)
