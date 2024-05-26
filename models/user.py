@@ -19,3 +19,9 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     weight = Column(Float, nullable=False)
     age = Column(Integer, nullable=False)
+
+    programs = relationship(
+        "Program",
+        backref="user",
+        cascade="all, delete-orphan"
+    )

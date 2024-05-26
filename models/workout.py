@@ -18,3 +18,9 @@ class Workout(BaseModel, Base):
 
     __tablename__ = 'workouts'
     name = Column(String(128), nullable=False)
+
+    videos = relationship(
+        "Video",
+        backref="workout",
+        cascade="all, delete-orphan"
+    )

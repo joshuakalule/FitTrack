@@ -9,8 +9,7 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, DateTime
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, DateTime, ForeignKey
 
 
 class Routine(BaseModel, Base):
@@ -19,5 +18,6 @@ class Routine(BaseModel, Base):
     __tablename__ = 'routines'
     title = Column(String(128), nullable=False)
     description = Column(String(512), nullable=False)
+    workout = Column(String(60), ForeignKey('workouts.id'), nullable=False)
     workout_time = Column(DateTime, nullable=False)
     workout_period = Column(DateTime, nullable=False)
