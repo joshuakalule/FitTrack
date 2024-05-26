@@ -21,3 +21,4 @@ This project is interpreted/tested on Ubuntu 20.04.6 LTS (Focal Fossa) using pyt
 ## Authors
 * Joshua Kalule - [Github](https://github.com/joshuakalule) / [Twitter](https://twitter.com/KarlYoshua)
 * Pimeh Tare-ere - [Github](https://github.com/PimehT) / [Twitter](https://twitter.com/pimehere)
+* Arthur Apedo Justin - [Github](https://github.com/creeds-knight) / [Twitter](https://x.com/aped_o)
