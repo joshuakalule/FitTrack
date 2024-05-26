@@ -12,8 +12,9 @@ class User(BaseModel, Base):
     """Representation of a user """
 
     __tablename__ = 'users'
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
+    username = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
     weight = Column(Float, nullable=False)
