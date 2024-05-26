@@ -19,5 +19,5 @@ This project is interpreted/tested on Ubuntu 20.04.6 LTS (Focal Fossa) using pyt
 ## Bugs
 
 ## Authors
-Joshua Kalule - [Github](https://github.com/joshuakalule) / [Twitter](https://t    witter.com/KarlYoshua)
-Pimeh Tare-ere - [Github](https://github.com/PimehT) / [Twitter](https://twitter.com/pimehere)
+* Joshua Kalule - [Github](https://github.com/joshuakalule) / [Twitter](https://twitter.com/KarlYoshua)
+* Pimeh Tare-ere - [Github](https://github.com/PimehT) / [Twitter](https://twitter.com/pimehere)
