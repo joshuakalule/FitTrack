@@ -1,7 +1,12 @@
 # FitTrack
 FitTrack is a comprehensive fitness platform designed to empower individuals of all fitness levels to achieve their health and wellness goals. Through cutting-edge technology and user-friendly features, FitTrack provides a personalized fitness experience that includes intuitive workout tracking and personalized exercise recommendations. More than just a website,. With its innovative approach and commitment to user empowerment. FitTrack is poised to revolutionize the future of fitness. Welcome to FitTrack—the ultimate fitness companion for achieving your goals and living your best life.
 
-## Table of Contents
+## Table of Content
+* [Environment](#environment)
+* [Installation](#installation)
+* [File Descriptions](#file-descriptions)
+* [Bugs](#bugs)
+* [Authors](#authors)
 
 ## Environment
 This project is interpreted/tested on Ubuntu 20.04.6 LTS (Focal Fossa) using python3 (version 3.4.3)
