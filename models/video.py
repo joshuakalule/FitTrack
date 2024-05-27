@@ -9,7 +9,7 @@ from sqlalchemy import Column, String, ForeignKey
 class Video(BaseModel, Base):
     """Representation of a video"""
 
-    __tablename__ = 'video'
+    __tablename__ = 'videos'
     workout_id = Column(String(60), ForeignKey('workouts.id'), nullable=False)
     name = Column(String(128), nullable=False)
     link = Column(String(256), nullable=False)

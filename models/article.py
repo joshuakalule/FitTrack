@@ -9,7 +9,7 @@ from sqlalchemy import Column, String
 class Article(BaseModel, Base):
     """Representation of a article"""
 
-    __tablename__ = 'article'
+    __tablename__ = 'articles'
     title = Column(String(128), nullable=True)
     author = Column(String(128), nullable=False)
     content = Column(String(1024), nullable=False)
