@@ -30,7 +30,6 @@ class FitTrackCommand(cmd.Cmd):
     def _key_value_parser(self, args):
         """creates a dictionary from a list of strings"""
         new_dict = {}
-        print(args)
         for arg in args:
             if "=" in arg:
                 kvp = arg.split('=', 1)
