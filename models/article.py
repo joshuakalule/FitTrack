@@ -10,5 +10,6 @@ class Article(BaseModel, Base):
     """Representation of a article"""
 
     __tablename__ = 'article'
-    name = Column(String(128), nullable=True)
+    title = Column(String(128), nullable=True)
     author = Column(String(128), nullable=False)
+    content = Column(String(1024), nullable=False)
