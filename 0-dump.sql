@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.8-rc, for Linux (x86_64)
 --
--- Host: localhost    Database: fitrack_dev_db
+-- Host: localhost    Database: fittrack_dev_db
 -- ------------------------------------------------------
 -- Server version	5.7.8-rc
 
@@ -16,14 +16,17 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Drop database
-DROP DATABASE IF EXISTS fitrack_dev_db;
+DROP DATABASE IF EXISTS fittrack_dev_db;
+DROP DATABASE IF EXISTS fittrack_test_db;
 
 -- Create database + user if doesn't exist
-CREATE DATABASE IF NOT EXISTS fitrack_dev_db;
+CREATE DATABASE IF NOT EXISTS fittrack_dev_db;
+CREATE DATABASE IF NOT EXISTS fittrack_test_db;
 CREATE USER IF NOT EXISTS 'admin'@'localhost';
 SET PASSWORD FOR 'admin'@'localhost' = 'adminfittrack';
-GRANT ALL ON fitrack_dev_db.* TO 'admin'@'localhost';
+GRANT ALL ON fittrack_dev_db.* TO 'admin'@'localhost';
+GRANT ALL ON fittrack_test_db.* TO 'admin'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 
-USE fitrack_dev_db;
+-- USE fittrack_dev_db;
