@@ -30,13 +30,14 @@ List of commands this console currently supports
 * `all` - Prints all string representation of all instances based or not on the class name.
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
-### `models/` directory conatining classes used for this project:
+### `models/` directory
 [base_model.py](/models/base_model.py)
 The `BaseModel()` class is the class from which other classes inherit. Acts as a template containing attributes; id, created_at, and updated_at
 * `def save(self)` - saves the current instance into the database by calling [storage.save()](/models/__init__.py). Also updates the value of updated_at to the current time.
 * `def to_dict(self)` - returns a dictionary containing all keys/values of the instance.
 
-### Models (these inherit from `BaseModel()` and `Base()`);NBSP
+### Models 
+These models inherit from `BaseModel()` and `Base()`);NBSP
 
 [article.py](/models/article.py)
 The `Article()` class handles articles. An article is like a brief blog talking about a specific workout, recommended programs, to-dos and not to-dos.
