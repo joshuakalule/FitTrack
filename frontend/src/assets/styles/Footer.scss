@@ -1,0 +1,31 @@
+@import './custom.scss';
+
+.footer {
+  background-color: $dark;
+  height: 200px;
+  color: $light;
+  padding: 1rem;
+  text-align: center;
+}
+
+.foot-menu {
+    color: #FFFFFF !important;
+    display: flex;
+    justify-content: space-between;
+}
+
+.foot-menu:hover, .foot-menu:active {
+    color: #999999;
+}
+
+.social-links {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+.socials {
+    height: 25px;
+    width: auto;
+}
