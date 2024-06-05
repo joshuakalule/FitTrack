@@ -1,48 +1,53 @@
-import React, { Component } from 'react'
-import { Container, CardGroup, Card } from 'react-bootstrap'
-import '../assets/styles/Features.scss'
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import track_workouts from '../assets/images/track_workouts.jpg';
+import setting_goal from '../assets/images/setting_goal.jpg';
+import progress_tracking from '../assets/images/progress_tracking.jpg';
 
 
-export default class Features extends Component {
-  render() {
-    return (
-      <Container className="features">
-        <h1>Features</h1>
-        <CardGroup className='row, flex-col-center'>
-          <Card>
-            <Card.Img variant="top" src={require('../assets/images/wellness.png')} />
-            <Card.Body>
-              <Card.Title>Track Your Fitness</Card.Title>
-              <Card.Text>
-                Stay on track! Log your workouts, monitor progress, and crush your fitness goals.
-                <br />
-                Track every step, rep, and calorie burned. Your fitness journey starts here.”
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Img variant="top" src={require('../assets/images/weightloss.png')} />
-            <Card.Body>
-              <Card.Title>Set Your Goals</Card.Title>
-              <Card.Text>
-                This card has supporting text below as a natural lead-in to
-                additional content.{' '}
-              </Card.Text>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Card.Img variant="top" src={require('../assets/images/competition.png')} />
-            <Card.Body>
-              <Card.Title>Monitor Progress</Card.Title>
-              <Card.Text>
-                This is a wider card with supporting text below as a natural lead-in
-                to additional content. This card has even longer content than the
-                first to show that equal height action.
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </CardGroup>
-      </Container>
-    )
+const featureImages = [
+  track_workouts,
+  setting_goal,
+  progress_tracking
+];
+
+const features = [
+  {
+    title: "Track Workouts",
+    description: "Log your workouts and monitor your progress over time. Keep track of daily exercises with checklists, view progress bars for completed tasks, and maintain records of your activity.",
+    imageUrl: featureImages[0]
+  },
+  {
+    title: "Setting Goals",
+    description: "Set personalized goals and get recommendations for workout plans and videos. Based on your objectives, receive tailored workout routines and video tutorials to help you stay on track and achieve your fitness targets.",
+    imageUrl: featureImages[1]
+  },
+  {
+    title: "Progress Tracking",
+    description: "Track your progress with detailed analytics and reports. Utilize a calendar to view your workout history, current plans, and future schedules. Stay organized and motivated by visualizing your fitness journey.",
+    imageUrl: featureImages[2]
   }
-}
+];
+
+const Features = () => {
+  return (
+    <Container className="my-5">
+      <h2 className="text-center mb-4">Key Features</h2>
+      <Row className="d-flex flex-column align-items-center">
+        {features.map((feature, index) => (
+          <Col key={index} md={8} className="mb-4">
+            <Card className="h-100 text-center">
+              <Card.Img variant="top" src={feature.imageUrl} alt={feature.title} />
+              <Card.Body>
+                <Card.Title>{feature.title}</Card.Title>
+                <Card.Text>{feature.description}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
+  );
+};
+
+export default Features;

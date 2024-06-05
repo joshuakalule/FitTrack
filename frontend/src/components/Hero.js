@@ -25,7 +25,7 @@ function ControlledCarousel() {
               Log In
             </Button>{' '}
             <Button variant='secondary' className='hero-button' size="lg">
-              Sign Up
+              Join Us
             </Button>
           </div>
         </Carousel.Caption>

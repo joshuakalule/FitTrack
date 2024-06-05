@@ -76,7 +76,7 @@ export default class Header extends Component {
                   className={`${menuOpen ? 'centered-links' : 'menu'}`}
                   as={ Link } to="/signup"
                 >
-                  Get Started
+                  Sign Up
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
