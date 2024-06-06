@@ -17,8 +17,8 @@ class User(BaseModel, Base):
     last_name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
-    weight = Column(Float, nullable=False)
-    age = Column(Integer, nullable=False)
+    weight = Column(Float, default=0)
+    age = Column(Integer, default=0)
 
     programs = relationship(
         "Program",

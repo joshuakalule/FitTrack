@@ -5,9 +5,15 @@ from flask import Flask, jsonify
 from models import storage
 from os import getenv
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 
 
 app = Flask(__name__)
+
+# TODO: add this to the .env file
+app.config['JWT_SECRET_KEY'] = 'zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx'
+jwt = JWTManager(app)
+
 # cors = CORS(app, resources={r'/*': {"origins": "0.0.0.0"}})
 cors = CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 app.register_blueprint(app_views)

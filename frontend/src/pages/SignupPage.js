@@ -4,6 +4,7 @@ import axios from 'axios';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
+    username: 'user',
     name: '',
     first_name: '',
     last_name: '',
@@ -16,7 +17,7 @@ function SignupPage() {
 
     try {
       // Make the Post request
-      const response = await axios.post('http://localhost:5000/api/v1/users', formData);
+      const response = await axios.post('http://192.168.33.9:5000/api/v1/users', formData);
       console.log('Response from server:', response.data);
       // Handle success (eg. show a success message)
       alert('User created successfully');
