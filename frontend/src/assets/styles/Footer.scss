@@ -9,6 +9,9 @@
 
 .foot-menu.nav-link {
     color: #F5F5F5 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .foot-menu.nav-link:hover {
