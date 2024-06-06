@@ -1,0 +1,71 @@
+@import './custom.scss';
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+// setting the carousel
+.custom-carousel, .custom-carousel .carousel-item {
+    height: 90vh;
+    min-height: 350px; /* Optional, set a minimum height */
+    background-image: url('../images/Hero.png');
+    background-position: calc(10% - 0.5px);
+    background-color: rgba(0, 0, 0, 0.7);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+    .carousel-item {
+        background-image: none;
+    }
+
+    .carousel-caption {
+        top: 40%;
+        transform: translateY(-50%);
+    }
+
+    .carousel-caption h1 {
+        font-size: 3em;
+        font-weight: 500;
+        margin-bottom: 5rem;
+    }
+
+    .carousel-caption h1 span {
+        font-style: italic;
+        font-weight: 700;
+    }
+
+    .carousel-caption p {
+        font-size: 1.2em;
+        margin-bottom: 2rem;
+    }
+
+    .carousel-caption .btn {
+        font-size: 1.5em;
+    }
+
+    .carousel-caption .btn-primary {
+        background-color: $info;
+        border-color: $info;
+        width: 150px;
+        margin-top: 1rem;
+    }
+
+    .carousel-caption .btn-primary:hover {
+        background-color: darken($info, 10%);
+        border-color: darken($info, 10%);
+    }
+
+    .carousel-caption .btn-secondary {
+        background-color: $secondary;
+        border-color: $secondary;
+        width: 150px;
+        margin-top: 1rem;
+    }
+
+    .carousel-caption .btn-secondary:hover {
+        background-color: darken($secondary, 10%);
+        border-color: darken($secondary, 10%);
+    }
+}

@@ -1,0 +1,23 @@
+@import './custom.scss';
+
+.footer {
+  background-color: $dark;
+  color: $light;
+  padding: 1rem;
+  text-align: center;
+}
+
+.foot-menu.nav-link {
+    color: #F5F5F5 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.foot-menu.nav-link:hover {
+    color: #999999 !important;
+}
+
+.socials.nav-link:hover {
+    color: #999999;
+}

@@ -1,0 +1,34 @@
+// src/custom.scss
+
+// Import Bootstrap's functions and variables
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+// Define your custom color variables
+$primary: #008080; // Teal
+$secondary: #32CD32; // Lime Green
+$success: #32CD32; // Lime Green
+$info: #1E90FF; // Blue
+$warning: #FFD700; // Soft Yellow
+$danger: #FF7F50; // Coral
+$light: #F5F5F5; // Light Gray
+$dark: #333333; // Dark Gray
+
+// Update any other Bootstrap variables you want to customize
+$body-bg: $light;
+$body-color: $dark;
+$bg-primary: $primary;
+
+// Import Bootstrap to apply the changes
+@import '~bootstrap/scss/bootstrap';
+
+// Custom styles for the landing page container
+.landing-page-container {
+  background-color: #FFFFFF;
+  color: #333333;
+  padding: 3rem;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+

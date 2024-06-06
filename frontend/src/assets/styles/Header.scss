@@ -1,0 +1,69 @@
+@import './custom.scss';
+
+
+// remove the default margin and padding of nav component
+.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
+    background-color: $primary;
+    padding: 0;
+}
+
+.nav-container {
+    background-color: $primary;
+}
+
+// logo region starts
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    font-style: italic;
+    color: $light; // Light Gray
+}
+
+.logo-img {
+    height: 80px;
+    width: auto;
+}
+// logo region ends
+
+// navbar region starts
+.navbar {
+    background-color: $primary !important; // Teal
+    color: $light; // Light Gray
+}
+
+.centered-links.nav-link {
+    background-color: $primary; // Teal
+    font-size: 20px !important;
+    font-weight: 400;
+    width: 100%;
+    color: $light !important;
+    display: flex;
+    justify-content: center !important;
+}
+
+.nav-link {
+    color: $light; // Light Gray
+}
+
+.menu.nav-link, #basic-nav-dropdown.dropdown-toggle.nav-link {
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $light !important; // Light Gray
+}
+
+.menu:hover, .menu:active, .centered-links:hover {
+    background-color: $secondary; // Lime Green
+    color: $light;
+    border-radius: 5px;
+}
+
+//navbar region ends
+
