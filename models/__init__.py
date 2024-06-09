@@ -4,12 +4,19 @@ initialize the models package
 """
 
 from os import getenv, environ
+from pathlib import Path
 from models.user import User
 from models.program import Program
 from models.article import Article
 from models.routine import Routine
 from models.workout import Workout
 from models.video import Video
+from dotenv import load_dotenv
+
+# load ENV variables from the .env file
+if not Path('.env').exists():
+    raise FileNotFoundError(".env file missing in the root directory.")
+load_dotenv()
 
 
 CLASSES = {
@@ -22,8 +29,8 @@ CLASSES = {
 }
 
 # set storage type
-if getenv('HBNB_ENV') is not None:
-    environ['HBNB_MYSQL_DB'] = 'hbnb_test_db'
+if getenv('FITTRACK_ENV') is not None:
+    environ['FITTRACK_MYSQL_DB'] = getenv("FITTRACK_TEST_DB")
 
 from models.engine.db_storage import DBStorage
 

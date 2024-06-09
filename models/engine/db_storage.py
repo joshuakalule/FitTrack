@@ -12,9 +12,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from dotenv import load_dotenv
 
-# load ENV variables from the .env file
-load_dotenv()
-
 
 class DBStorage:
     """interaacts with the MySQL database"""
@@ -23,18 +20,22 @@ class DBStorage:
 
     def __init__(self):
         """Instantiate a DBStorage object"""
-        HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        HBNB_MYSQL_DB = getenv('HBNB_MYSQL_DB')
-        HBNB_ENV = getenv('HBNB_ENV')
+        FITTRACK_MYSQL_USER = getenv('FITTRACK_MYSQL_USER')
+        FITTRACK_MYSQL_PWD = getenv('FITTRACK_MYSQL_PWD')
+        FITTRACK_MYSQL_HOST = getenv('FITTRACK_MYSQL_HOST')
+        FITTRACK_MYSQL_DB = getenv('FITTRACK_MYSQL_DB')
+        FITTRACK_ENV = getenv('FITTRACK_ENV')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(HBNB_MYSQL_USER,
-                                             HBNB_MYSQL_PWD,
-                                             HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
-        if HBNB_ENV == "test":
+                                      format(FITTRACK_MYSQL_USER,
+                                             FITTRACK_MYSQL_PWD,
+                                             FITTRACK_MYSQL_HOST,
+                                             FITTRACK_MYSQL_DB))
+        if FITTRACK_ENV == "test":
             Base.metadata.drop_all(self.__engine)
+
+    def find_user(email, password):
+        """return a user based on email and password."""
+
 
     def all(self, cls=None):
         """query on the current database session"""

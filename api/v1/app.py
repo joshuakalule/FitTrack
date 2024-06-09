@@ -10,8 +10,7 @@ from flask_jwt_extended import JWTManager
 
 app = Flask(__name__)
 
-# TODO: add this to the .env file
-app.config['JWT_SECRET_KEY'] = 'zaCELgL.0imfnc8mVLWwsAawjYr4Rx-Af50DDqtlx'
+app.config['JWT_SECRET_KEY'] = getenv("JWT_SECRET_KEY")
 jwt = JWTManager(app)
 
 # cors = CORS(app, resources={r'/*': {"origins": "0.0.0.0"}})
@@ -32,6 +31,6 @@ def not_found(error):
 
 
 if __name__ == "__main__":
-    host = getenv("HBNB_API_HOST", default="0.0.0.0")
-    port = getenv("HBNB_API_PORT", default="5000")
+    host = getenv("FITTRACK_API_HOST", default="0.0.0.0")
+    port = getenv("FITTRACK_API_PORT", default="5000")
     app.run(host=host, port=port, threaded=True, debug=True)

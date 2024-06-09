@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: localhost    Database: hbnb_dev_db
+-- Host: localhost    Database: fittrack_dev_db
 -- ------------------------------------------------------
 -- Server version	5.7.22
 
@@ -16,13 +16,13 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- Drop database
-DROP DATABASE IF EXISTS hbnb_dev_db;
+DROP DATABASE IF EXISTS fittrack_dev_db;
 
 -- Create database + user if doesn't exist
-CREATE DATABASE IF NOT EXISTS hbnb_dev_db;
-CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost';
-SET PASSWORD FOR 'hbnb_dev'@'localhost' = 'hbnb_dev_pwd';
-GRANT ALL ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
-GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
+CREATE DATABASE IF NOT EXISTS fittrack_dev_db;
+CREATE USER IF NOT EXISTS 'fittrack_dev'@'localhost';
+SET PASSWORD FOR 'fittrack_dev'@'localhost' = 'fittrack_dev_pwd';
+GRANT ALL ON fittrack_dev_db.* TO 'fittrack_dev'@'localhost';
+GRANT SELECT ON performance_schema.* TO 'fittrack_dev'@'localhost';
 FLUSH PRIVILEGES;
 
