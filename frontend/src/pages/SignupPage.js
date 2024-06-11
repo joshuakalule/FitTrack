@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
-    name: '',
+    username: '',
     first_name: '',
     last_name: '',
     email: '',
     password: '',
   });
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.username
+        || !formData.first_name
+        || !formData.last_name
+        || !formData.email || 
+        !formData.password) {
+      alert('Please fill in all fields');
+      return;
+    }
+
+    const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+    if (!emailRegex.test(formData.email)) {
+      alert('Please enter a valid email');
+      return;
+    }
+
     try {
       // Make the Post request
-      const response = await axios.post('http://localhost:5000/api/v1/users', formData);
+      const response = await axios.post('http://54.236.43.35:5000/api/v1/users', formData);
       console.log('Response from server:', response.data);
-      // Handle success (eg. show a success message)
-      alert('User created successfully');
-      // Redirect to profile-setup page
+      // Redirect to profile-setup page if successful
+      navigate('/login');
     } catch (error) {
       console.error('Error:', error);
+      alert('Error signing up');
     }
   }
 
@@ -36,11 +54,11 @@ function SignupPage() {
 
   return (
     <Container className="mt-5" style={{
-      height: '80vh', maxWidth: '600px'
+      height: '100vh', maxWidth: '600px'
     }}>
       <h2>Sign Up</h2>
       <Form>
-        <Form.Group controlId="formBasicName" style={{marginBottom: 
+        <Form.Group controlId="formBasicFirstName" style={{marginBottom: 
           "2rem"
         }}>
           <Form.Label>First Name</Form.Label>
@@ -50,10 +68,11 @@ function SignupPage() {
             name="first_name"
             value={formData.first_name}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicName" style={{marginBottom: 
+        <Form.Group controlId="formBasicLastName" style={{marginBottom: 
           "2rem"
         }}>
           <Form.Label>Last Name</Form.Label>
@@ -63,6 +82,21 @@ function SignupPage() {
             name="last_name"
             value={formData.last_name}
             onChange={handleChange}
+            required
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formBasicUserName" style={{marginBottom: 
+          "2rem"
+        }}>
+          <Form.Label>User Name</Form.Label>
+          <Form.Control 
+            type="text"
+            placeholder="Enter username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -76,6 +110,8 @@ function SignupPage() {
             name="email"
             value={formData.email}
             onChange={handleChange}
+            required
+            pattern='[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$'
           />
         </Form.Group>
 
@@ -89,6 +125,7 @@ function SignupPage() {
             name="password"
             value={formData.password}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 

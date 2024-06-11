@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 // import ExampleCarouselImage from './ExampleCarouselImage';
 import '../assets/styles/Carousel.scss';
 import '../assets/styles/custom.scss';
@@ -21,10 +22,14 @@ function ControlledCarousel() {
           <h3 className='sub-title'>Your Fitness Companion</h3>
           <p className='description'>Track your fitness journey and achieve your goals.</p>
           <div className="mb-2">
-            <Button variant="primary" className='hero-button' size="lg">
+            <Button variant="primary" className='hero-button' size="lg"
+              as={ Link } to="/login"
+            >
               Log In
             </Button>{' '}
-            <Button variant='secondary' className='hero-button' size="lg">
+            <Button variant='secondary' className='hero-button' size="lg"
+              as={ Link } to="/signup"
+            >
               Join Us
             </Button>
           </div>
