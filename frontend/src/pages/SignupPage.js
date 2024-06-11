@@ -4,8 +4,7 @@ import axios from 'axios';
 
 function SignupPage() {
   const [formData, setFormData] = useState({
-    username: 'user',
-    name: '',
+    username: 'user1',
     first_name: '',
     last_name: '',
     email: '',

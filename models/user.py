@@ -4,8 +4,33 @@ import models
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
-from sqlalchemy import Column, String, Float, Integer
+from sqlalchemy import Column, String, Float, Integer, Table, ForeignKey
 from sqlalchemy.orm import relationship
+
+"""Associative table for routines of a user."""
+user_routines = Table(
+    'user_routines',
+    Base.metadata,
+    Column('user_id', String(60),
+           ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
+           primary_key=True),
+    Column('routine_id', String(60),
+           ForeignKey('routines.id', onupdate='CASCADE', ondelete='CASCADE'),
+           primary_key=True),
+)
+
+
+"""Associative table for goals of a user."""
+user_goals = Table(
+    'user_goals',
+    Base.metadata,
+    Column('user_id', String(60),
+           ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
+           primary_key=True),
+    Column('goal_id', String(60),
+           ForeignKey('goals.id', onupdate='CASCADE', ondelete='CASCADE'),
+           primary_key=True),
+)
 
 
 class User(BaseModel, Base):
@@ -19,9 +44,20 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     weight = Column(Float, default=0)
     age = Column(Integer, default=0)
-
-    programs = relationship(
-        "Program",
-        backref="user",
-        cascade="all, delete-orphan"
+    goals = relationship(
+        "Goal", secondary="user_goals",
+        backref="user_program",
+        viewonly=True
     )
+    routines = relationship(
+        "Routine", secondary="user_routines",
+        backref="users",
+        viewonly=True
+    )
+
+    def to_dict(self):
+        """overwrite to_dict by adding relationships."""
+        data = super().to_dict()
+        data['routines'] = [routine.id for routine in self.routines]
+        data['goals'] = [goal.id for goal in self.goals]
+        return data

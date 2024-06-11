@@ -3,7 +3,9 @@
 from api.v1.views import app_views
 from flask import jsonify, request
 from models import storage
-from models.user import User
+from models.user import User, user_goals
+from models.goal import Goal
+
 
 from flask_jwt_extended import (
     create_access_token, 
@@ -11,6 +13,36 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 from werkzeug.security import generate_password_hash, check_password_hash
+
+
+@app_views.route('/users/<user_id>/goals', methods=['POST'])
+def set_goals(user_id):
+    data = request.get_json(silent=True)
+    if not isinstance(data, dict):
+        return jsonify({"error": "Not a JSON"}), 400
+
+    required = [
+        "goal_id"
+    ]
+    for attr in required:
+        if attr not in data:
+            return jsonify({"error": f"Missing {attr}"}), 400
+
+    if not storage.get(Goal, data['goal_id']):
+        return jsonify({"error": f"Unknown goal"}), 404
+
+    user = storage.get(User, user_id)
+    if user is None:
+        return jsonify({"error": "User not found"}), 404
+
+    if data['goal_id'] in [g.id for g in user.goals]:
+        return jsonify({"error": "User already has goal"}), 404
+
+    values = {'user_id': user_id, 'goal_id': data['goal_id']}
+    result = storage.insert(user_goals, values)
+    if not result:
+        return jsonify({"error": f"Cannot be added"}), 500
+    return jsonify({"Status": "Successful"}), 201
 
 
 @app_views.route('/users', strict_slashes=False, methods=['GET'])
@@ -25,7 +57,7 @@ def get_user(user_id):
     user = storage.get(User, user_id)
     if user is None:
         return jsonify({"error": "Not found"}), 404
-    return jsonify(user.to_dict())
+    return jsonify(user.to_dict()), 200
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'])
@@ -43,12 +75,19 @@ def create_user():
     data = request.get_json(silent=True)
     if not isinstance(data, dict):
         return jsonify({"error": "Not a JSON"}), 400
-    if 'email' not in data:
-        return jsonify({"error": "Missing email"}), 400
-    if 'password' not in data:
-        return jsonify({"error": "Missing password"}), 400
 
-    # TODO: ensure that the username and email are unique
+    required = [
+        "email", "password", "username", "first_name", "last_name"
+    ]
+    for attr in required:
+        if attr not in data:
+            return jsonify({"error": f"Missing {attr}"}), 400
+
+    # Ensure that the username and email are unique
+    if storage.get_user(email=data.get('email', None)):
+        return jsonify({'error': "email exists"}), 400
+    if storage.get_user(username=data.get('username', None)):
+        return jsonify({'error': "username exists"}), 400
 
     # store the password hash and not the actual password
     hashed_password = generate_password_hash(data['password'],
@@ -58,7 +97,7 @@ def create_user():
     
     user = User(**data)
     user.save()
-    return jsonify(user.to_dict()), 201
+    return jsonify({'user_id': user.id}), 201
 
 
 @app_views.route('/login', strict_slashes=False, methods=['POST'])
@@ -66,24 +105,23 @@ def login():
     data = request.get_json(silent=True)
     if not isinstance(data, dict):
         return jsonify({"error": "Not a JSON"}), 400
-    if 'email' not in data:
-        return jsonify({"error": "Missing email"}), 400
-    if 'password' not in data:
-        return jsonify({"error": "Missing password"}), 400
-    users = storage.all(User)
-    email = data.get('email')
-    user_id = None
-    password = data.get('password')
-    for user_key, user_obj in users.items():
-        if user_obj.email == email:
-            if check_password_hash(user_obj.password, password):
-                user_id = user_obj.id
-                break
-    if user_id is None:
-        return jsonify({'Error': 'Authentication failed'}), 401
-    access_token = create_access_token(identity=user_id)
+    required = [
+        "email", "password"
+    ]
+    for attr in required:
+        if attr not in data:
+            return jsonify({"error": f"Missing {attr}"}), 400
+    
+    user = storage.get_user(email=data.get('email'))
+    print(type(user))
+    if user is None:
+        return jsonify({'Error': 'unknown email and/or password'}), 401
+    if not check_password_hash(user.password, data.get('password')):
+        return jsonify({'Error': 'unknown email and/or password'}), 401
 
-    return jsonify({'access_token': access_token}), 200
+    access_token = create_access_token(identity=user.id)
+
+    return jsonify({'access_token': access_token, 'user_id': user.id}), 200
 
 
 @app_views.route('/protected', strict_slashes=False, methods=['GET'])

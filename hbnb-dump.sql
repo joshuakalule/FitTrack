@@ -20,9 +20,11 @@ DROP DATABASE IF EXISTS fittrack_dev_db;
 
 -- Create database + user if doesn't exist
 CREATE DATABASE IF NOT EXISTS fittrack_dev_db;
+CREATE DATABASE IF NOT EXISTS fittrack_test_db;
 CREATE USER IF NOT EXISTS 'fittrack_dev'@'localhost';
 SET PASSWORD FOR 'fittrack_dev'@'localhost' = 'fittrack_dev_pwd';
 GRANT ALL ON fittrack_dev_db.* TO 'fittrack_dev'@'localhost';
+GRANT ALL ON fittrack_test_db.* TO 'fittrack_dev'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'fittrack_dev'@'localhost';
 FLUSH PRIVILEGES;
 

@@ -1,0 +1,42 @@
+## TODO
+AIzaSyCpk9XXVmdL-O5ghhcA8Sd7fyucY-7dIL8
+
+1. create sql query for users 🆗✔
+2. create model for goals 🆗✔
+("Strengh Training", "Cardiovascular", "Stretching/Flexibility", "Toning"
+"Balance/Agility")
+3. create model for body focus (Upper, Lower, Core, or Full) 🆗✔
+update program model 🆗✔
+update workout model 🆗✔
+4. validate login and signin information 🆗✔
+5. make the correct response for login (include user id) 🆗✔
+6. populate programs and workouts
+7. change HBNB to FITTRACK 🆗✔
+--------
+changes made in files;
+- hbnb-dump.sql
+- .env
+- models/engine/db_storage.db
+- models/__init__.py
+- api/v1/app.py
+--------
+8. add routine table
+
+
+#### Register a New User
+curl -X POST http://127.0.0.1:5000/api/v1/users -H "Content-Type: application/json" -d '{"username":"testuser","password":"testpass"}'
+
+
+#### Login to Get a Token
+curl -X POST http://127.0.0.1:5000/api/v1/login -H "Content-Type: application/json" -d '{"email":"martha.coulibaly@gmail.com","password":"testpass"}'
+
+This will return a JSON response containing an access_token.
+
+#### Access Protected Route
+Use the token to access a protected route:
+curl -X GET http://127.0.0.1:5000/protected -H "Authorization: Bearer <your_access_token>"
+
+
+
+
+

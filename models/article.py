@@ -12,4 +12,4 @@ class Article(BaseModel, Base):
     __tablename__ = 'articles'
     title = Column(String(128), nullable=True)
     author = Column(String(128), nullable=False)
-    content = Column(String(1024), nullable=False)
+    content = Column(String(4096), nullable=False)

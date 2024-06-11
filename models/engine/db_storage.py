@@ -11,6 +11,7 @@ import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from dotenv import load_dotenv
+from sqlalchemy import insert
 
 
 class DBStorage:
@@ -33,8 +34,45 @@ class DBStorage:
         if FITTRACK_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
-    def find_user(email, password):
-        """return a user based on email and password."""
+    def insert(self, table_obj, values_dict):
+        """Insert objects into a table, use for association tables."""
+        self.close()
+        try:
+            with self.__engine.connect() as conn:
+                stmt = insert(table_obj).values(**values_dict)
+                result = conn.execute(stmt)
+                conn.commit()
+                self.reload()
+        except Exception as e:
+            print(e)
+            return False
+        
+        return True
+
+    def get_user(self, **kwargs):
+        """return a user based on attribute(s)."""
+        if not kwargs:
+            return
+        priority_list = [
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "password",
+            "weight",
+            "age"
+        ]
+        filter_by_dict = dict()
+        for attr in priority_list:
+            if attr not in kwargs:
+                continue
+            key, value = attr, kwargs[attr]
+            filter_by_dict[key] = value
+
+        from models.user import User
+        user_obj = self.__session.query(User).filter_by(**filter_by_dict).first()
+
+        return user_obj
 
 
     def all(self, cls=None):
