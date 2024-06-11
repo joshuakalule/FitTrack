@@ -1,4 +1,5 @@
 ## TODO
+# This is a dumy api key, does not work!!!!
 AIzaSyCpk9XXVmdL-O5ghhcA8Sd7fyucY-7dIL8
 
 1. create sql query for users 🆗✔
