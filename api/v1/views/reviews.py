@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ program_reviews module for the API """
-from api.v1.views import app_views
+from api.v1.views import app_views, implement_args
 from flask import jsonify, request
 from models import storage
 from models.review import ProgramReview, WorkoutReview, MAX_RATING
@@ -47,6 +47,7 @@ def add_program_review():
 def get_program_reviews():
     program_reviews = storage.all(ProgramReview)
     program_review_list = [program_review.to_dict() for program_review in program_reviews.values()]
+    program_review_list = implement_args(program_review_list)
     return jsonify(program_review_list)
 
 

@@ -7,18 +7,6 @@ import sqlalchemy
 from sqlalchemy import Column, String, Float, Integer, Table, ForeignKey
 from sqlalchemy.orm import relationship
 
-"""Associative table for routines of a user."""
-user_routines = Table(
-    'user_routines',
-    Base.metadata,
-    Column('user_id', String(60),
-           ForeignKey('users.id', onupdate='CASCADE', ondelete='CASCADE'),
-           primary_key=True),
-    Column('routine_id', String(60),
-           ForeignKey('routines.id', onupdate='CASCADE', ondelete='CASCADE'),
-           primary_key=True),
-)
-
 
 """Associative table for goals of a user."""
 user_goals = Table(
@@ -46,13 +34,13 @@ class User(BaseModel, Base):
     age = Column(Integer, default=0)
     goals = relationship(
         "Goal", secondary="user_goals",
-        backref="user_program",
+        backref="user",
         viewonly=True
     )
     routines = relationship(
-        "Routine", secondary="user_routines",
-        backref="users",
-        viewonly=True
+        "Routine",
+        backref="user",
+        cascade="all, delete-orphan"
     )
 
     def to_dict(self):

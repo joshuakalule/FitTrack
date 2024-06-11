@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ routines module for the API """
-from api.v1.views import app_views
+from api.v1.views import app_views, implement_args
 from flask import jsonify, request
 from models import storage
 from models.routine import Routine
@@ -25,6 +25,7 @@ def get_completion(routine_id):
 def get_routines():
     routines = storage.all(Routine)
     routine_list = [routine.to_dict() for routine in routines.values()]
+    routine_list = implement_args(routine_list)
     return jsonify(routine_list)
 
 

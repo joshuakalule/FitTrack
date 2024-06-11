@@ -47,7 +47,7 @@ finally:
 
 # POPULATE DATABASE
 import openpyxl as op
-from models.user import User, user_routines, user_goals
+from models.user import User, user_goals
 from models.program import Program, program_goals
 from models.routine import Routine
 from models.workout_day import WorkoutDay
@@ -141,7 +141,6 @@ for ws_name, data in data_constraints.items():
 # populate association tables
 
 association_tables = {
-    'user_routines': user_routines,
     'user_goals': user_goals,
     'program_goals': program_goals,
     'workout_likes': workout_likes,

@@ -44,11 +44,6 @@ class Program(BaseModel, Base):
         "Goal", secondary="program_goals",
         backref="programs"
     )
-    routines = relationship(
-        "Routine",
-        backref="program",
-        cascade="all, delete-orphan"
-    )
     workouts = relationship(
         "Workout",
         backref="program",

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ workouts module for the API """
-from api.v1.views import app_views
+from api.v1.views import app_views, implement_args
 from flask import jsonify, request
 from models import storage
 from models.workout import Workout
@@ -9,6 +9,7 @@ from models.workout import Workout
 def get_workouts():
     workouts = storage.all(Workout)
     workout_list = [workout.to_dict() for workout in workouts.values()]
+    workout_list = implement_args(workout_list)
     return jsonify(workout_list)
 
 

@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import models
 from models.base_model import BaseModel, Base, date
 from models.workout_day import WorkoutDay
+from models.program import Program
 import sqlalchemy
 from sqlalchemy import (
     Column, String, Date, ForeignKey
@@ -27,7 +28,6 @@ class Routine(BaseModel, Base):
     )
 
     def __init__(self, *args, **kwargs):
-        from models.program import Program
         """Overwrite to convert time."""
         super().__init__(*args, **kwargs)
         if kwargs.get("start_date", None):
@@ -35,15 +35,17 @@ class Routine(BaseModel, Base):
         if kwargs.get("end_date", None):
             self.end_date = datetime.strptime(kwargs["end_date"], date).date()
         # get program
-        self.program =  models.storage.get(Program, self.program_id)
+        program =  models.storage.get(Program, self.program_id)
         # set end date, -1 bcoz day one is one the start date
-        program_duration = self.program.duration
+        program_duration = program.duration
         self.end_date = self.start_date + timedelta(days=program_duration-1)
+        self.save()
 
     def calculate_completion(self):
         """Calculate completion rate of program."""
+        program =  models.storage.get(Program, self.program_id)
         total = 0
-        duration = self.program.duration
+        duration = program.duration
         for workout_day in self.workout_days:
             total += int(workout_day.completed_status)
 
@@ -64,11 +66,12 @@ class Routine(BaseModel, Base):
     
     def reload_object(self):
         """Reload object after changes are made."""
+        program =  models.storage.get(Program, self.program_id)
         # 1. check if start_date changed
-        if self.end_date - self.start_date == timedelta(days=self.program.duration-1):
+        if self.end_date - self.start_date == timedelta(days=program.duration-1):
             return
         # 1. set new end_date
-        self.end_date = self.start_date + timedelta(days=self.program.duration-1)
+        self.end_date = self.start_date + timedelta(days=program.duration-1)
         # 2. delete WorkoutDay objs
         for workout_day in self.workout_days:
             models.storage.delete(workout_day)
@@ -82,7 +85,8 @@ class Routine(BaseModel, Base):
 
     def organize_days(self):
         """create WorkoutDay objs from start_date to end_date."""
-        for workout in self.program.workouts:
+        program =  models.storage.get(Program, self.program_id)
+        for workout in program.workouts:
             day_tally = workout.workout_day
             workout_date = self.start_date + timedelta(days=day_tally-1)
 
@@ -90,7 +94,7 @@ class Routine(BaseModel, Base):
                 'date': workout_date,
                 'workout_id': workout.id,
                 'routine_id': self.id,
-                'program_id': self.program_id
+                'program_id': program.id
             }
             obj = WorkoutDay(**workout_day_kwargs)
             obj.save()

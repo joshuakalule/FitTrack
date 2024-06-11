@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ goals module for the API """
-from api.v1.views import app_views
+from api.v1.views import app_views, implement_args
 from flask import jsonify, request
 from models import storage
 from models.goal import Goal
@@ -10,6 +10,7 @@ from models.goal import Goal
 def get_goals():
     goals = storage.all(Goal)
     goal_list = [goal.to_dict() for goal in goals.values()]
+    goal_list = implement_args(goal_list)
     return jsonify(goal_list)
 
 

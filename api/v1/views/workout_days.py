@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ workout_days module for the API """
-from api.v1.views import app_views
+from api.v1.views import app_views, implement_args
 from flask import jsonify, request
 from models import storage
 from models.workout_day import WorkoutDay
