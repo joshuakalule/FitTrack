@@ -32,8 +32,7 @@ class Program(BaseModel, Base):
     title = Column(String(128), nullable=False)
     description = Column(String(512), nullable=False)
     duration = Column(Integer, nullable=False) # in days
-    difficulty = Column(Integer, CheckConstraint('difficulty <= 5'),
-                        nullable=False)
+    difficulty = Column(String(16), nullable=False)
     body_focus_id = Column(String(60), ForeignKey('body_focus.id'), nullable=False)
     body_focus = relationship(
         "BodyFocus",

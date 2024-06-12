@@ -2,7 +2,8 @@
 """
 Run this script to clear the database, and then populate it with data
 """
-FILE_PATH = "api-utils/fittrack_data.xlsx"
+FILE_PATH = "/home/vagrant/shared_folder_link/fittrack_data.xlsx"
+# FILE_PATH = "api-utils/fittrack_data.xlsx"
 
 # DELETE EXISTING DATABASE
 from sqlalchemy import create_engine
@@ -47,7 +48,7 @@ finally:
 
 # POPULATE DATABASE
 import openpyxl as op
-from models.user import User, user_goals
+from models.user import User, user_goals, user_body_focus
 from models.program import Program, program_goals
 from models.routine import Routine
 from models.workout_day import WorkoutDay
@@ -111,11 +112,16 @@ def worksheet(ws_name, obj, types=dict()):
 
 data_constraints = {
     'users': (User,
-              {'weight': float, 'age': int}),
+              {
+                  'weight': float, 
+                  'age': int,
+                  'height': float,
+                  'weight_goal': float,
+              }),
     'goals': (Goal, ),
     'body_focus': (BodyFocus,),
     'programs': (Program,
-                 {'duration': int, 'difficulty': int}),
+                 {'duration': int, }),
     'routines': (Routine,),
     'videos': (Video,
                {'thumbnail_width': int, 'thumbnail_height': int}),
@@ -144,6 +150,7 @@ association_tables = {
     'user_goals': user_goals,
     'program_goals': program_goals,
     'workout_likes': workout_likes,
+    'user_body_focus': user_body_focus,
 }
 
 for table, table_obj in association_tables.items():

@@ -36,9 +36,17 @@ class DBStorage:
 
     def insert(self, table_obj, values_dict):
         """Insert objects into a table, use for association tables."""
-        stmt = insert(table_obj).values(**values_dict)
-        self.__session.execute(stmt)
-        self.__session.commit()
+        # self.close()
+        try:
+            with self.__engine.connect() as conn:
+                stmt = insert(table_obj).values(**values_dict)
+                result = conn.execute(stmt)
+                # conn.commit()
+                # self.reload()
+        except Exception as e:
+            print(e)
+            return False, e
+        
         return True, 'success'
 
     def get_user(self, **kwargs):

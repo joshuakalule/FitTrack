@@ -3,8 +3,9 @@
 from api.v1.views import app_views
 from flask import jsonify, request
 from models import storage
-from models.user import User, user_goals
+from models.user import User, user_goals, user_body_focus
 from models.goal import Goal
+from models.body_focus import BodyFocus
 
 
 from flask_jwt_extended import (
@@ -136,14 +137,45 @@ def protected():
 
 @app_views.route('/users/<user_id>', methods=['PUT'])
 def update_user(user_id):
+    acceptable_attrs = [
+        "weight", "height", "age", "weight_goal", "difficulty"
+    ]
     user = storage.get(User, user_id)
     if user is None:
         return jsonify({"error": "Not found"}), 404
     data = request.get_json(silent=True)
     if not isinstance(data, dict):
         return jsonify({"error": "Not a JSON"}), 400
+    if 'difficulty' in data:
+        if x:=data['difficulty'] not in ['low', 'middle', 'high']:
+            return jsonify({
+                "error": f"invalid difficulty '{x}'"
+            }), 400
+    
+    # isolate goals
+    if 'goals' in data:
+        goals = data['goals']
+        for _, goal_obj in storage.all(Goal).items():
+            if goal_obj in user.goals:
+                continue
+            if str(goal_obj.title).lower() in [g.lower() for g in goals]:
+                values = {'user_id': user.id, 'goal_id': goal_obj.id}
+                res = storage.insert(user_goals, values)
+                if not res[0]:
+                    jsonify({"error": res[1]}), 500
+    # isolate body_part
+    if 'body_parts' in data:
+        body_parts = data['body_parts']
+        for _, bp_obj in storage.all(BodyFocus).items():
+            if bp_obj in user.body_focuses:
+                continue
+            if str(bp_obj.title).lower() in [bp.lower() for bp in body_parts]:
+                values = {'user_id': user.id, 'body_focus_id': bp_obj.id}
+                res = storage.insert(user_body_focus, values)
+                if not res[0]:
+                    jsonify({"error": res[1]}), 500
     for key, value in data.items():
-        if key not in ['id', 'email', 'created_at', 'updated_at']:
+        if key in acceptable_attrs:
             setattr(user, key, value)
     user.save()
-    return jsonify(user.to_dict()), 200
+    return jsonify({"user_id": user.id}), 200
