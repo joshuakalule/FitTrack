@@ -21,6 +21,9 @@ When you visit our website, Nginx displays the static content first, like seeing
 * [Environment](#environment)
 * [Installation](#installation)
 * [File Descriptions](#file-descriptions)
+  * [Api](#api-directory)
+  * [Models](#models-directory)
+  * [Engine](#engine-directory)
 * [Bugs](#bugs)
 * [Authors](#authors)
 
@@ -51,8 +54,10 @@ List of commands this console currently supports
 * `all` - Prints all string representation of all instances based or not on the class name.
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
-### `models/` directory
-This folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
+### Api directory
+
+### Models directory
+This [models](/models) folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
 These are the models used;
 * [BaseModel](/models/base_model.py): Template containing attributes; id, created_at, and updated_at.
 * [Article](/models/article.py): An article is like a brief blog talking about a specific workout, recommended programs, to-dos and not to-dos.
@@ -66,8 +71,9 @@ These are the models used;
 * [Workout](/models/workout.py): A workout is an engagement that a user can do as they exercise and keep fit.
 * [WorkoutDay](/models/workout_day.py): A WorkoutDay is a user attached instance of a workout that specifies the day of action as well as user progress.
 
-#### `/models/engine` directory 
-This contains the DBStorage class that handles all data saving and retrieval
+### Engine directory
+The [engine](/models/engine) folder consists of files that handle all data saving and retrieval.
+
 [DBStorage](/models/engine/db_storage.py): Handles data storage and retrieval from the Database using SQLAlchamey. The `storage` instance is created from this class.
 
 ##### Functionalities of the storage instance:
