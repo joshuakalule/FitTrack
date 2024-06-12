@@ -54,83 +54,34 @@ List of commands this console currently supports
 ### `models/` directory
 This folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
 These are the models used;
-* [BaseModel](/models/base_model.py): Template containing attributes; id, created_at, and updated_at
-* [Article](/models/article.py)
-* [BodyFocus](/models/body_focus.py)
-* [Goal](/models/goal.py)
-* [Program](/models/program.py)
-* [Review](/models/review.py)
-* [Routine](/models/routine.py)
-* [User](/models/user.py)
-* [Video](/models/video.py)
-* [Workout](/models/workout.py)
-* [WorkoutDay](/models/workout_day.py)
-The `BaseModel()` class is the class from which other classes inherit. Acts as a template containing attributes; id, created_at, and updated_at
-* `def save(self)` - saves the current instance into the database by calling [storage.save()](/models/__init__.py). Also updates the value of updated_at to the current time.
-* `def to_dict(self)` - returns a dictionary containing all keys/values of the instance.
+* [BaseModel](/models/base_model.py): Template containing attributes; id, created_at, and updated_at.
+* [Article](/models/article.py): An article is like a brief blog talking about a specific workout, recommended programs, to-dos and not to-dos.
+* [BodyFocus](/models/body_focus.py): These are parts of a body a user, program or workout focuses on.
+* [Goal](/models/goal.py): A goal is an end result that a user, or program intends to achieve.
+* [Program](/models/program.py): A program is a structure consisting of workouts and the days to do them that a user can take on in their fitness journey.
+* [ProgramReview](/models/review.py): Handles reviews a user makes on a program.
+* [Routine](/models/routine.py): A routine is a user attached structure adopted from a program that specifies the start and end date as well as keep track of user progress.
+* [User](/models/user.py): Handles user information
+* [Video](/models/video.py): Handles video information
+* [Workout](/models/workout.py): A workout is an engagement that a user can do as they exercise and keep fit.
+* [WorkoutDay](/models/workout_day.py): A WorkoutDay is a user attached instance of a workout that specifies the day of action as well as user progress.
 
-### Models 
-These models inherit from `BaseModel()` and `Base()`);NBSP
-
-[article.py](/models/article.py)
-The `Article()` class handles articles. An article is like a brief blog talking about a specific workout, recommended programs, to-dos and not to-dos.
-* title - title of the article
-* author - author of the article
-* content - content of the article
-
-[program.py](/models/program.py)
-The `Program()` class handles the program of the user. A program is a collection of workouts and their routines that a user shall follow to achieve their fitness goals.
-* name - name of the program
-* user_id - id of user of the program
-* start_date - start date of the program
-* end_date - end date of the program
-
-[routine.py](/models/routine.py)
-The `Routine()` class handles routines of users. A routine is a period (time and period) within which a workout is done. For example; Doing *yoga* for *30 minutes* *3 times a week* is a routine.
-* title - name of the routine
-* description - description of the routine
-* program_id - id of the program within which this routine was made
-* workout_id - id of the workout being done
-* workout_time - time of the workout e.g *30 minutes*
-* workout_period - period to do the workout e.g *3 times a week*
-
-[user.py](/models/user.py)
-The `User()` class handles the user information.
-* username - alias name of the user
-* first_name - first name
-* last_name - last name
-* email - email
-* password - password
-* weight - weight
-* age - age
-
-[video.py](/models/video.py)
-The `Video()` class handles the video information.
-* workout_id - id of the workout that this video is showing
-* name - name of the video
-* link - link to the video
-* thumbnail_path - path to the thumbnail
-* description - a short description
-
-[workout.py](/models/workout.py)
-The `Workout()` class handles the workouts of the user. A workout is an exercise that a user can do. For example; Press-ups, pull-ups, squarts, yoga
-* name - name of thw workout
-* program_id - id of the program this workout has been attached
-
-
-#### `/models/engine` directory contains the DBStorage class 
-[db_storage.py](/models/engine/db_storage.py)
-The `DBStorage()` class handles data storage and retrieval from the Database using SQLAlchamey. The `storage` instance is created from this class.
+#### `/models/engine` directory 
+This contains the DBStorage class that handles all data saving and retrieval
+[DBStorage](/models/engine/db_storage.py): Handles data storage and retrieval from the Database using SQLAlchamey. The `storage` instance is created from this class.
 
 ##### Functionalities of the storage instance:
 * `storage.all(cls=None)` - get all objects if cls is None, else retrieve a list of all cls objects.
-* `storage.new(obj)` - add `obj` into the session. This is the temporary storage before adding to the database.
-* `storage.save()` - commits/saves the current changes in the session into the database.
-* `storage.delete(obj)` - delete `obj` from the session.
-* `storage.reload()` - fetch data from the database and load it into the session.
 * `storage.close()` - close/release the current session. This provides room for data to be fetched from the database thereby allowing changes made to reflect immediately.
-* `storage.get(cls, id)` -  get the instance of `cls` with the id `id`
 * `storage.count(cls=None)` - counts the number of `cls` instances in the current session, or all objects if None.
+* `storage.delete(obj)` - delete `obj` from the session.
+* `storage.get(cls, id)` -  get the instance of `cls` with the id `id`
+* `storage.get_user(self, **kwargs)` - retrieves a user based on the key word arguments provided.
+* `storage.insert(self, table_obj, values_dict)` - used to insert rows into association tables.
+* `storage.new(obj)` - add `obj` into the session. This is the temporary storage before adding to the database.
+* `storage.reload()` - fetch data from the database and load it into the session.
+* `storage.save()` - commits/saves the current changes in the session into the database.
+
 
 `/tests` directory contains all unit test cases for this project
 
