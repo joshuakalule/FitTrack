@@ -55,9 +55,48 @@ List of commands this console currently supports
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
 ### Api directory
+The [api](/api) folder houses files that handle all api calls that expose endpoints to access data from the backend.
+
+List of endpoints
+* 'api/v1/articles'
+* 'api/v1/articles/<article_id>'
+* 'api/v1/body_focus'
+* 'api/v1/body_focus/<body_focus_id>'
+* 'api/v1/goals'
+* 'api/v1/goals/<goal_id>'
+* 'api/v1/status'
+* 'api/v1/stats'
+* 'api/v1/programs'
+* 'api/v1/programs/<program_id>'
+* 'api/v1/program_reviews'
+* 'api/v1/program_reviews'
+* 'api/v1/program_reviews/<program_review_id>'
+* 'api/v1/program_reviews/<program_review_id>'
+* 'api/v1/program_reviews/<program_review_id>'
+* 'api/v1/routines/<routine_id>/completion'
+* 'api/v1/routines'
+* 'api/v1/routines/<routine_id>'
+* 'api/v1/routines/<routine_id>'
+* 'api/v1/routines/<routine_id>'
+* 'api/v1/add_program/<user_id>'
+* 'api/v1/users/<user_id>/goals'
+* 'api/v1/users'
+* 'api/v1/users/<user_id>'
+* 'api/v1/users/<user_id>'
+* 'api/v1/users'
+* 'api/v1/login'
+* 'api/v1/protected'
+* 'api/v1/users/<user_id>'
+* 'api/v1/videos'
+* 'api/v1/videos/<video_id>'
+* 'api/v1/workout_days/<workout_day_id>'
+* 'api/v1/workout_days'
+* 'api/v1/workout_days/<workout_day_id>'
+* 'api/v1/workouts'
+* 'api/v1/workouts/<workout_id>'
 
 ### Models directory
-This [models](/models) folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
+The [models](/models) folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
 These are the models used;
 * [BaseModel](/models/base_model.py): Template containing attributes; id, created_at, and updated_at.
 * [Article](/models/article.py): An article is like a brief blog talking about a specific workout, recommended programs, to-dos and not to-dos.
