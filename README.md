@@ -36,6 +36,9 @@ This project is interpreted/tested on Ubuntu 20.04.6 LTS (Focal Fossa) using pyt
 * Run console(interactively): `./console` and enter command
 * Run console(non-interactively): `echo "<command>" | ./console.py`
 
+## Usage
+Sign up at [Fittrack Sign up](http://web-02.onepimeht.tech/signup), enter user details and the application will recommend workouts based on the user goals. Happy working out!😁
+
 ## File Descriptions
 [console.py](console.py)
 The console contains the entry point of the command intepreter. It has the following functionalities.
@@ -133,6 +136,12 @@ The [engine](/models/engine) folder consists of files that handle all data savin
 
 ## Bugs
 * When using `create Class attr="attr_value"` in console.py, adding a space in the *attr_value* will disqualify the attribute.
+
+# Contributing
+All creators whose videos shall be shown
+
+# Licensing
+GNU General Public License (GPLv3)
 
 ## Authors
 * Joshua Kalule - [Github](https://github.com/joshuakalule) / [Twitter](https://twitter.com/KarlYoshua)
