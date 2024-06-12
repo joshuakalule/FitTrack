@@ -1,6 +1,21 @@
 # FitTrack
 [FitTrack](http://web-02.onepimeht.tech) is a comprehensive fitness platform designed to empower individuals of all fitness levels to achieve their health and wellness goals. Through cutting-edge technology and user-friendly features, FitTrack provides a personalized fitness experience that includes intuitive workout tracking and personalized exercise recommendations. More than just a website,. With its innovative approach and commitment to user empowerment. FitTrack is poised to revolutionize the future of fitness. Welcome to FitTrack—the ultimate fitness companion for achieving your goals and living your best life.
 
+## Project Overview
+
+The website functions like a modern library with two main sections: the **Frontend** and the **Backend**.
+
+### Frontend (The Library Layout)
+- **Built with React**: Our interactive website elements are created using React, similar to a library's layout that helps visitors navigate.
+- **Static Content**: Handled by **Nginx**, these are the parts of the website that remain constant, akin to the bookshelves in a library.
+
+### Backend (The Library Management Office)
+- **Built with Flask**: Our website's dynamic management is powered by Flask, comparable to a library's catalog system for book management.
+- **Dynamic Content**: Updated information provided by **Gunicorn**, resembling a librarian providing the latest book on a topic.
+
+### How They Work Together
+When you visit our website, Nginx displays the static content first, like seeing the bookshelves upon entering a library. For more specific, current information, Gunicorn and Flask collaborate to provide it, just as a librarian would assist you with finding the latest book.
+
 ## Table of Content
 * [Environment](#environment)
 * [Installation](#installation)
