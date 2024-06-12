@@ -12,9 +12,10 @@ The website functions like a modern library with two main sections: the **Fronte
 ### Backend (The Library Management Office)
 - **Built with Flask**: Our website's dynamic management is powered by Flask, comparable to a library's catalog system for book management.
 - **Dynamic Content**: Updated information provided by **Gunicorn**, resembling a librarian providing the latest book on a topic.
+- **Database**: Stores data in a MYSQL database which is like the entire library containing books
 
 ### How They Work Together
-When you visit our website, Nginx displays the static content first, like seeing the bookshelves upon entering a library. For more specific, current information, Gunicorn and Flask collaborate to provide it, just as a librarian would assist you with finding the latest book.
+When you visit our website, Nginx displays the static content first, like seeing the bookshelves upon entering a library. For more specific, current information, Gunicorn and Flask collaborate to provide it from the database, just as a librarian would assist you with finding the latest book.
 
 ## Table of Content
 * [Environment](#environment)
@@ -51,7 +52,19 @@ List of commands this console currently supports
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
 ### `models/` directory
-[base_model.py](/models/base_model.py)
+This folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
+These are the models used;
+* [BaseModel](/models/base_model.py): Template containing attributes; id, created_at, and updated_at
+* [Article](/models/article.py)
+* [BodyFocus](/models/body_focus.py)
+* [Goal](/models/goal.py)
+* [Program](/models/program.py)
+* [Review](/models/review.py)
+* [Routine](/models/routine.py)
+* [User](/models/user.py)
+* [Video](/models/video.py)
+* [Workout](/models/workout.py)
+* [WorkoutDay](/models/workout_day.py)
 The `BaseModel()` class is the class from which other classes inherit. Acts as a template containing attributes; id, created_at, and updated_at
 * `def save(self)` - saves the current instance into the database by calling [storage.save()](/models/__init__.py). Also updates the value of updated_at to the current time.
 * `def to_dict(self)` - returns a dictionary containing all keys/values of the instance.
