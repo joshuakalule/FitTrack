@@ -58,42 +58,42 @@ List of commands this console currently supports
 The [api](/api) folder houses files that handle all api calls that expose endpoints to access data from the backend.
 
 List of endpoints
-* 'api/v1/articles'
-* 'api/v1/articles/<article_id>'
-* 'api/v1/body_focus'
-* 'api/v1/body_focus/<body_focus_id>'
-* 'api/v1/goals'
-* 'api/v1/goals/<goal_id>'
-* 'api/v1/status'
-* 'api/v1/stats'
-* 'api/v1/programs'
-* 'api/v1/programs/<program_id>'
-* 'api/v1/program_reviews'
-* 'api/v1/program_reviews'
-* 'api/v1/program_reviews/<program_review_id>'
-* 'api/v1/program_reviews/<program_review_id>'
-* 'api/v1/program_reviews/<program_review_id>'
-* 'api/v1/routines/<routine_id>/completion'
-* 'api/v1/routines'
-* 'api/v1/routines/<routine_id>'
-* 'api/v1/routines/<routine_id>'
-* 'api/v1/routines/<routine_id>'
-* 'api/v1/add_program/<user_id>'
-* 'api/v1/users/<user_id>/goals'
-* 'api/v1/users'
-* 'api/v1/users/<user_id>'
-* 'api/v1/users/<user_id>'
-* 'api/v1/users'
-* 'api/v1/login'
-* 'api/v1/protected'
-* 'api/v1/users/<user_id>'
-* 'api/v1/videos'
-* 'api/v1/videos/<video_id>'
-* 'api/v1/workout_days/<workout_day_id>'
-* 'api/v1/workout_days'
-* 'api/v1/workout_days/<workout_day_id>'
-* 'api/v1/workouts'
-* 'api/v1/workouts/<workout_id>'
+* '/articles' : [articles.py](api/v1/views/articles.py)
+* '/articles/<article_id>' : [articles.py](api/v1/views/articles.py)
+* '/body_focus' : [body_focus.py](api/v1/views/body_focus.py)
+* '/body_focus/<body_focus_id>' : [body_focus.py](api/v1/views/body_focus.py)
+* '/goals' : [goals.py](api/v1/views/goals.py)
+* '/goals/<goal_id>' : [goals.py](api/v1/views/goals.py)
+* '/status' : [index.py](api/v1/views/index.py)
+* '/stats' : [index.py](api/v1/views/index.py)
+* '/programs' : [programs.py](api/v1/views/programs.py)
+* '/programs/<program_id>' : [programs.py](api/v1/views/programs.py)
+* '/program_reviews' : [reviews.py](api/v1/views/reviews.py)
+* '/program_reviews' : [reviews.py](api/v1/views/reviews.py)
+* '/program_reviews/<program_review_id>' : [reviews.py](api/v1/views/reviews.py)
+* '/program_reviews/<program_review_id>' : [reviews.py](api/v1/views/reviews.py)
+* '/program_reviews/<program_review_id>' : [reviews.py](api/v1/views/reviews.py)
+* '/routines/<routine_id>/completion' : [routines.py](api/v1/views/routines.py)
+* '/routines' : [routines.py](api/v1/views/routines.py)
+* '/routines/<routine_id>' : [routines.py](api/v1/views/routines.py)
+* '/routines/<routine_id>' : [routines.py](api/v1/views/routines.py)
+* '/routines/<routine_id>' : [routines.py](api/v1/views/routines.py)
+* '/add_program/<user_id>' : [routines.py](api/v1/views/routines.py)
+* '/users/<user_id>/goals' : [users.py](api/v1/views/users.py)
+* '/users' : [users.py](api/v1/views/users.py)
+* '/users/<user_id>' : [users.py](api/v1/views/users.py)
+* '/users/<user_id>' : [users.py](api/v1/views/users.py)
+* '/users' : [users.py](api/v1/views/users.py)
+* '/login' : [users.py](api/v1/views/users.py)
+* '/protected' : [users.py](api/v1/views/users.py)
+* '/users/<user_id>' : [users.py](api/v1/views/users.py)
+* '/videos' : [videos.py](api/v1/views/videos.py)
+* '/videos/<video_id>' : [videos.py](api/v1/views/videos.py)
+* '/workout_days/<workout_day_id>' : [workout_days.py](api/v1/views/workout_days.py)
+* '/workout_days' : [workout_days.py](api/v1/views/workout_days.py)
+* '/workout_days/<workout_day_id>' : [workout_days.py](api/v1/views/workout_days.py)
+* '/workouts' : [workouts.py](api/v1/views/workouts.py)
+* '/workouts/<workout_id>' : [workouts.py](api/v1/views/workouts.py)
 
 ### Models directory
 The [models](/models) folder contains the models that are the backbone of datastorage and retrieval. These define the types of data and relationships.
