@@ -20,11 +20,14 @@ When you visit our website, Nginx displays the static content first, like seeing
 ## Table of Content
 * [Environment](#environment)
 * [Installation](#installation)
+* [Usage](#usage)
 * [File Descriptions](#file-descriptions)
   * [Api](#api-directory)
   * [Models](#models-directory)
   * [Engine](#engine-directory)
 * [Bugs](#bugs)
+* [Contributing](#contributing)
+* [Licensing](#licensing)
 * [Authors](#authors)
 
 ## Environment
@@ -137,10 +140,10 @@ The [engine](/models/engine) folder consists of files that handle all data savin
 ## Bugs
 * When using `create Class attr="attr_value"` in console.py, adding a space in the *attr_value* will disqualify the attribute.
 
-# Contributing
+## Contributing
 All creators whose videos shall be shown
 
-# Licensing
+## Licensing
 GNU General Public License (GPLv3)
 
 ## Authors
