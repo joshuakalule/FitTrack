@@ -58,7 +58,7 @@ class Program(BaseModel, Base):
     def to_dict(self):
         """over write to_dict() to include relationships."""
         data = super().to_dict()
-        data['goals'] = [goal.id for goal in self.goals]
+        data['goals'] = [goal.title for goal in self.goals]
         data['workouts'] = [workout.id for workout in self.workouts]
         ratings = [pr.rating for pr in self.reviews]
         data['rating'] = str(round(sum(ratings) / len(ratings), 1)) + '/' + str(MAX_RATING)

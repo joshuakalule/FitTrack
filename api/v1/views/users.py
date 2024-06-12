@@ -175,6 +175,12 @@ def update_user(user_id):
                 if not res[0]:
                     jsonify({"error": res[1]}), 500
     for key, value in data.items():
+        if key in ['weight', 'height', 'weight_goal']:
+            if value == '': continue
+            value = float(value)
+        if key in ['age']:
+            if value == '': continue
+            value = int(value)
         if key in acceptable_attrs:
             setattr(user, key, value)
     user.save()

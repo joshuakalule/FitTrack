@@ -13,7 +13,7 @@ class WorkoutDay(BaseModel, Base):
 
     __tablename__ = 'workout_days'
     program_id = Column(String(60), ForeignKey('programs.id'), nullable=False)
-    routine_id = Column(String(60), ForeignKey('routines.id'), nullable=False)
+    routine_id = Column(String(60), ForeignKey('routines.id'))
     workout_id = Column(String(60), ForeignKey('workouts.id'), nullable=False)
     completed_status = Column(Boolean, default=False)
     date = Column(Date, nullable=False)

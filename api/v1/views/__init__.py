@@ -31,7 +31,7 @@ def implement_args(return_list):
     if str(limit).isdigit() and len(output) > int(limit) and int(limit) > 0:
         end = int(limit)
         output = output[:end]
-    else:
+    elif limit != 'None':
         print(f"[WARNING]: limit='{limit}' does not evaluate, no limit applied.")
     return output
     

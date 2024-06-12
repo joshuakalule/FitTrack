@@ -47,11 +47,21 @@ def update_routine(routine_id):
     if not isinstance(data, dict):
         return jsonify({"error": "Not a JSON"}), 400
     
-    for key, value in data.items():
-        if key == 'start_date':
-            value = datetime.strptime(value, date).date()
-        if key not in ['id', 'created_at', 'updated_at']:
-            setattr(routine, key, value)
+    if 'start_date' not in data:
+        return jsonify({"error": "Start date missing"}), 400
+    try:
+        start_date = datetime.strptime(data['start_date'], date).date()
+    except Exception as e:
+        return jsonify({
+            "error": f"start date does not confrom to '{date}'"}), 500
+
+    if start_date == routine.start_date:
+        return jsonify({"routine_id": routine.id}), 304
+
+    if start_date < datetime.now().date():
+        return jsonify({"error": "Start date cannot be in the past"}), 400
+
+    setattr(routine, 'start_date', start_date)
     
     routine.save()
     return jsonify({"routine_id": routine.id}), 200

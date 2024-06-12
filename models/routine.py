@@ -49,14 +49,14 @@ class Routine(BaseModel, Base):
         for workout_day in self.workout_days:
             total += int(workout_day.completed_status)
 
-        
         completion = (total / duration) * 100
         return round(completion, 1)
 
     def to_dict(self):
         """Overwrite to_dict to accomodate for relationships."""
         data = super().to_dict()
-        data['workout_days'] = [wd.id for wd in self.workout_days]
+        w_days = sorted(self.workout_days, key=lambda day: day.date)
+        data['workout_days'] = [wd.id for wd in w_days]
         data['percent_completion'] = self.calculate_completion()
         # remove unwanted objs
         for attr in ['program', ]:
@@ -72,9 +72,11 @@ class Routine(BaseModel, Base):
             return
         # 1. set new end_date
         self.end_date = self.start_date + timedelta(days=program.duration-1)
-        # 2. delete WorkoutDay objs
+        # 2. disassociate WorkoutDay objs from routine, cascade deletes them
         for workout_day in self.workout_days:
-            models.storage.delete(workout_day)
+            workout_day.routine_id = None
+            # models.storage.delete(workout_day)
+        models.storage.save()
         # 3. set new workout days
         self.organize_days()
 
