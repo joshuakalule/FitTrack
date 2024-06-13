@@ -33,13 +33,13 @@ function LoginPage() {
       // if profile setup redirect to dashboard
       if (profileResponse.data.logged_in_as) {
         const userId = profileResponse.data.logged_in_as;
+        // store userId in local storage
         const userResponse = await axios.get(`http://54.236.43.35:5000/api/v1/users/${userId}`);
-        console.log(userResponse.data);
         if (userResponse.data.age !== 0) {
           navigate('/dashboard');
+        } else {
+          navigate('/profile-setup');
         }
-      // else redirect to profile-setup page
-      navigate('/profile-setup');
       } 
     } catch (error) {
       console.error('Login Error:', error);

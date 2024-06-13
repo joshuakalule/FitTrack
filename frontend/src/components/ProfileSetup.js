@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import '../assets/styles/Contact.scss';
+import AuthContext from '../utils/AuthContext';
 
 function ProfileSetup() {
+  const { getUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     age: '',
@@ -12,8 +14,9 @@ function ProfileSetup() {
     weight: '',
     height: '',
     body_parts: [],
+    goals: [],
     weight_goal: '',
-    intensity: '',
+    difficulty: '',
   });
 
   const handleInputChange = (e) => {
@@ -31,22 +34,30 @@ function ProfileSetup() {
     });
   };
 
+  const handleGoalsChange = (e) => {
+    const { value, checked } = e.target;
+    setProfileData((prevState) => {
+      const updatedGoals = checked
+        ? [...prevState.goals, value]
+        : prevState.goals.filter((goal) => goal !== value);
+      return { ...prevState, goals: updatedGoals };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('Profile Data:', profileData);
 
-    const { age, gender, weight, height, body_parts, weight_goal, intensity } = profileData;
-    if (!age || !gender || !weight || !height || body_parts.length === 0 || !weight_goal || !intensity) {
+    const { age, gender, weight, height, body_parts, goals, difficulty } = profileData;
+    if (!age || !gender || !weight || !height || body_parts.length === 0 || goals.length === 0 ||!difficulty) {
       alert('Please fill in all fields');
       return;
     }
 
     try {
-      const token = localStorage.getItem('authToken'); // Retrieve token from localStorage
-      const config = {
-        headers: { Authorization: `Bearer ${token}` }
-      };
-      const response = await axios.post('http://54.236.43.35:5000/api/v1/profile', profileData, config);
+      const userProfile = await getUserProfile();
+      const response = await axios.put(`http://54.236.43.35:5000/api/v1/users/${userProfile}`, profileData);
+      // const userId = response.data.id;
       console.log('Response from server:', response.data);
       navigate('/dashboard');
     } catch (error) {
@@ -84,7 +95,6 @@ function ProfileSetup() {
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
-              <option value="other">Other</option>
             </Form.Control>
           </Form.Group>
 
@@ -117,7 +127,7 @@ function ProfileSetup() {
           <Form.Group style={{ marginBottom: "2rem "}}>
             <Form.Label>Target Body Parts</Form.Label>
             <div>
-              {['arms', 'legs', 'back', 'chest', 'abs'].map((part) => (
+              {['arms', 'legs', 'back', 'chest', 'abs', 'glutes'].map((part) => (
                 <Form.Check
                   key={part}
                   type="checkbox"
@@ -125,6 +135,29 @@ function ProfileSetup() {
                   value={part}
                   checked={profileData.body_parts.includes(part)}
                   onChange={handleBodyPartsChange}
+                />
+              ))}
+            </div>
+          </Form.Group>
+
+          <Form.Group style={{ marginBottom: "2rem "}}>
+            <Form.Label>Goals</Form.Label>
+            <div>
+              {[
+                'strength training',
+                'cardiovascular',
+                'stretching/flexibility',
+                'toning',
+                'balance/agility',
+                'weight loss'
+              ].map((goal) => (
+                <Form.Check
+                  key={goal}
+                  type="checkbox"
+                  label={goal.charAt(0).toUpperCase() + goal.slice(1)}
+                  value={goal}
+                  checked={profileData.goals.includes(goal)}
+                  onChange={handleGoalsChange}
                 />
               ))}
             </div>
@@ -139,19 +172,19 @@ function ProfileSetup() {
               onChange={handleInputChange}
               placeholder="Enter your target weight"
               min="1"
-              required
+              required={profileData.goals.includes('weight loss')}
             />
           </Form.Group>
 
           <Form.Group style={{ marginBottom: "2rem "}}>
-            <Form.Label>Preferred Intensity</Form.Label>
+            <Form.Label>Preferred Difficulty</Form.Label>
             <Form.Control
               as="select"
-              name="intensity"
-              value={profileData.intensity}
+              name="difficulty"
+              value={profileData.difficulty}
               onChange={handleInputChange}
             >
-              <option value="">Select Intensity</option>
+              <option value="">Select Difficulty</option>
               <option value="low">Low</option>
               <option value="mid">Mid</option>
               <option value="high">High</option>

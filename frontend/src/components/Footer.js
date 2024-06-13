@@ -10,10 +10,10 @@ export default class Footer extends Component {
           {/* Footer links */}
           <Nav className="justify-content-center">
             <Nav.Item>
-              <Nav.Link className="foot-menu" href="/home">About</Nav.Link>
+              <Nav.Link className="foot-menu" href="/about">About</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link className="foot-menu" eventKey="/contact">Contact Us</Nav.Link>
+              <Nav.Link className="foot-menu" href='/contact' eventKey="/contact">Contact Us</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link className="foot-menu" eventKey="/privacy">Privacy Policy</Nav.Link>

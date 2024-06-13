@@ -130,7 +130,7 @@ function SignupPage() {
         </Form.Group>
 
         <div className='d-grid gap-2'>
-          <Button variant="primary" type="submit" onClick={handleSubmit}>
+          <Button variant="primary" size="lg" type="submit" onClick={handleSubmit}>
             Sign Up
           </Button>
         </div>

@@ -35,28 +35,28 @@ const Header = () => {
               >
                 Home
               </Nav.Link>
-              <Nav.Link
-                className={`${menuOpen ? 'centered-links' : 'menu'}`}
-                as={ Link } to="/about"
-              >
-                About
-              </Nav.Link>
-              <Nav.Link
-                className={`${menuOpen ? 'centered-links' : 'menu'}`}
-                as={ Link } to="/contact"
-              >
-                Contact
-              </Nav.Link>
+              {isAuthenticated ? (
+                <Nav.Link
+                  className={`${menuOpen ? 'centered-links' : 'menu'}`}
+                  as={ Link } to="/dashboard"
+                >
+                  Dashboard
+                </Nav.Link>
+              ) : (
+                <Nav.Link
+                  className={`${menuOpen ? 'centered-links' : 'menu'}`}
+                  as={ Link } to="/about"
+                >
+                  About
+                </Nav.Link>
+              )}
               <NavDropdown
                 title="Features"
                 id="basic-nav-dropdown"
                 className={`${menuOpen ? 'centered-links' : 'menu'}`}
               >
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                <NavDropdown.Item as={ Link } to="/videos">Videos</NavDropdown.Item>
+                <NavDropdown.Item as={ Link } to="/workout-days">Workout Days</NavDropdown.Item>
               </NavDropdown>
             </Nav>
             {/* set login and sign up as conditional
@@ -67,7 +67,7 @@ const Header = () => {
                 <>
                   <Nav.Link
                     className={`${menuOpen ? 'centered-links' : 'menu'}`}
-                    as={ Link } to="/profile"
+                    as={ Link } to="/profile-setup"
                   >
                     Profile
                   </Nav.Link>

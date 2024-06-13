@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Create a Context for the authentication
 const AuthContext = createContext();
@@ -25,8 +26,21 @@ export const AuthProvider = ({ children }) => {
     setIsAuthenticated(false);
   };
 
+  const getUserProfile = async () => {
+    const token = localStorage.getItem('authToken');
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+    try {
+      const response = await axios.get('http://54.236.43.35:5000/api/v1/protected', config);
+      return response.data.logged_in_as;
+    } catch (error) {
+      console.error('Error getting user profile:', error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout, getUserProfile }}>
       {children}
     </AuthContext.Provider>
   );
