@@ -17,6 +17,12 @@ The website functions like a modern library with two main sections: the **Fronte
 ### How They Work Together
 When you visit our website, Nginx displays the static content first, like seeing the bookshelves upon entering a library. For more specific, current information, Gunicorn and Flask collaborate to provide it from the database, just as a librarian would assist you with finding the latest book.
 
+### Screenshots
+
+![alt text](https://github.com/joshuakalule/FitTrack/blob/Fullstack/pictures/img1.jpeg)
+
+![alt text](https://github.com/joshuakalule/FitTrack/blob/Fullstack/pictures/img2.jpeg)
+
 ## Table of Content
 * [Environment](#environment)
 * [Installation](#installation)
