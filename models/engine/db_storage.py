@@ -34,6 +34,73 @@ class DBStorage:
         if FITTRACK_ENV == "test":
             Base.metadata.drop_all(self.__engine)
 
+    def get_routine(self, id):
+        """Return a user consumable dataset."""
+        from models.routine import Routine
+        routine = self.get(Routine, id)
+        if routine is None:
+            return False, {}
+        # expand program
+        program_wanted_keys = [
+            "body_focus_id", "description", "difficulty", "duration",
+            "goals", "rating", "reviewers", "title"
+        ]
+        from models.program import Program
+        program = self.get(Program, routine.program_id)
+        program_data = dict()
+        for key, value in program.to_dict().items():
+            if key not in program_wanted_keys:
+                continue
+            if key == "body_focus_id":
+                key = "body_part"
+            else:
+                program_data[key] = value
+        # expand workout_days
+        workout_day_wanted_keys = [
+            "completed_status", "date"
+        ]
+        workout_day_list = list()
+        for wd_obj in routine.workout_days:
+            wd_data = dict()
+            for k, v in wd_obj.to_dict().items():
+                if key not in workout_day_wanted_keys:
+                    continue
+                wd_data[k] = v
+            # populate fields from the workout
+            from models.workout import Workout
+            workout = self.get(Workout, wd_obj.workout_id)
+            wd_data['workout_likes'] = len(workout.likes)
+            wd_data['workout_title'] = workout.title
+            wd_data['workout_day_position'] = workout.workout_day
+            # also video
+            video_wanted_keys = [
+                "description", "thumbnail_height", "thumbnail_width",
+                "thumbnail_url", "title", "youtube_video_id"
+            ]
+            video_data = dict()
+            from models.video import Video
+            video = self.get(Video, workout.video_id)
+            for k, v in video.to_dict().items():
+                if k not in video_wanted_keys:
+                    continue
+                video_data[k] = v
+            wd_data["video"] = video_data
+            workout_day_list.append(wd_data)
+        # now populate routine data
+        routine_wanted_keys = [
+            "percent_completion", "start_date", "end_date", "user_id"
+        ]
+        routine_data = dict()
+        for k, v in routine.to_dict().items():
+            if k not in routine_wanted_keys:
+                continue
+            routine_data[k] = v
+        routine_data["program"] = program_data
+        routine_data["workout_days"] = workout_day_list
+
+        return True, routine_data
+
+
     def insert(self, table_obj, values_dict):
         """Insert objects into a table, use for association tables."""
         stmt = insert(table_obj).values(**values_dict)

@@ -58,6 +58,8 @@ class Routine(BaseModel, Base):
         w_days = sorted(self.workout_days, key=lambda day: day.date)
         data['workout_days'] = [wd.id for wd in w_days]
         data['percent_completion'] = self.calculate_completion()
+        data['start_date'] = self.start_date.strftime(date)
+        data['end_date'] = self.end_date.strftime(date)
         # remove unwanted objs
         for attr in ['program', ]:
             if attr in data:

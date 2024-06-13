@@ -9,6 +9,16 @@ from models.program import Program
 from models.base_model import date
 from models.user import User
 from datetime import datetime
+from pprint import pprint
+
+
+@app_views.route('/get-routine/<routine_id>', strict_slashes=False, methods=['GET'])
+def get_routine_data(routine_id):
+    status, routine_data = storage.get_routine(routine_id)
+    if not status:
+        return jsonify({"error": "Error fetching data"}), 500
+    print(routine_data)
+    return jsonify(routine_data), 200
 
 @app_views.route('/routines/<routine_id>/completion', strict_slashes=False, methods=['GET'])
 def get_completion(routine_id):
