@@ -4,7 +4,7 @@ Contains the class DBStorage
 """
 
 import models
-from models.base_model import BaseModel, Base
+from models.base_model import BaseModel, Base, date
 from models.user import User
 from os import getenv
 import sqlalchemy
@@ -62,10 +62,8 @@ class DBStorage:
         workout_day_list = list()
         for wd_obj in routine.workout_days:
             wd_data = dict()
-            for k, v in wd_obj.to_dict().items():
-                if key not in workout_day_wanted_keys:
-                    continue
-                wd_data[k] = v
+            wd_data["completed_status"] = wd_obj.completed_status
+            wd_data["date"] = wd_obj.date.strftime(date)
             # populate fields from the workout
             from models.workout import Workout
             workout = self.get(Workout, wd_obj.workout_id)

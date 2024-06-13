@@ -17,7 +17,6 @@ def get_routine_data(routine_id):
     status, routine_data = storage.get_routine(routine_id)
     if not status:
         return jsonify({"error": "Error fetching data"}), 500
-    print(routine_data)
     return jsonify(routine_data), 200
 
 @app_views.route('/routines/<routine_id>/completion', strict_slashes=False, methods=['GET'])
