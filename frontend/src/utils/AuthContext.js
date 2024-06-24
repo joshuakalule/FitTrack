@@ -38,12 +38,10 @@ export const AuthProvider = ({ children }) => {
       console.error('Error getting user profile:', error);
     }
   };
-
   return (
     <AuthContext.Provider value={{ isAuthenticated, login, logout, getUserProfile }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
 export default AuthContext;
